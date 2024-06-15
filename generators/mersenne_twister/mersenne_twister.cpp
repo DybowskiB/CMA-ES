@@ -1,6 +1,6 @@
 #include "mersenne_twister.h"
 
-MersenneTwister::MersenneTwister(int seed) : RandomNumberGenerator(seed), rng(seed) {}
+MersenneTwister::MersenneTwister(uint64_t seed) : RandomNumberGenerator(seed), rng(static_cast<unsigned int>(seed)) {}
 
 double MersenneTwister::generate()
 {

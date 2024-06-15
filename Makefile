@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17
 
 # Directories
-SRCDIRS = . algorithm generators
+SRCDIRS = . algorithm generators/linear_congruential generators/mersenne_twister generators/xoroshiro generators/halton generators/laggedFibonacci generators/chacha20
 OBJDIR = obj
 
 # Executable file

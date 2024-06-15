@@ -1,15 +1,14 @@
-#ifndef RANDOM_NUMBER_GENERATOR_H
-#define RANDOM_NUMBER_GENERATOR_H
+#pragma once
 
 #include <vector>
+#include <cstdint>
 
 // Abstract class for random number generator
-class RandomNumberGenerator {
+class RandomNumberGenerator
+{
 public:
-    unsigned int seed;
-    RandomNumberGenerator(int seed) : seed(seed) {}
+    uint64_t seed;
+    RandomNumberGenerator(uint64_t seed) : seed(seed) {}
     virtual double generate() = 0;
     virtual ~RandomNumberGenerator() {}
 };
-
-#endif // RANDOM_NUMBER_GENERATOR_H

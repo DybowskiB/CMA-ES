@@ -1,5 +1,4 @@
-#ifndef CMAES_H
-#define CMAES_H
+#pragma once
 
 #include <vector>
 #include <functional>
@@ -25,5 +24,3 @@ private:
     std::vector<std::pair<double, std::vector<double>>> evaluate_samples(const std::vector<std::vector<double>>& samples, std::function<double(const std::vector<double>&)> objective_function);
     void update_distribution(const std::vector<std::pair<double, std::vector<double>>>& evaluated_samples);
 };
-
-#endif // CMAES_H
