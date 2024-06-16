@@ -2,7 +2,8 @@
 
 MersenneTwister::MersenneTwister(uint64_t seed) : RandomNumberGenerator(seed), rng(static_cast<unsigned int>(seed)) {}
 
-double MersenneTwister::generate()
+double MersenneTwister::generate(double a, double b)
 {
-    return std::generate_canonical<double, 10>(rng);
+    std::uniform_real_distribution<double> dist(a, b);
+    return dist(rng);
 }

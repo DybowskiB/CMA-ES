@@ -1,26 +1,71 @@
 #pragma once
 
+#include "../newmat11/newmat.h"
+#include "../newmat11/newmatio.h"
+#include "../newmat11/newmatap.h"
+#include "../generators/random_number_generator.h"
+
 #include <vector>
 #include <functional>
-#include <random>
-#include "../generators/random_number_generator.h"
 
 class CMAES {
 public:
-    CMAES(int n, int lambda, double sigma, std::vector<double> initial_mean, RandomNumberGenerator& rng_generator);
+    CMAES(int nrows, int ncols, RandomNumberGenerator& rng_generator);
 
-    std::vector<double> optimize(int max_iterations, std::function<double(const std::vector<double>&)> objective_function);
+    void optimize(int max_iterations, double sigma_limit, std::function<double(const RowVector&)> objective_function);
 
 private:
-    int n; // number of variables in the optimization problem
-    int lambda; // population size, i.e., the number of generated samples
-    double sigma; // initial standard deviation.
-    std::vector<double> mean; // vector storing the mean values of variables
-    std::vector<double> weights; // vector containing weights assigned to each sample or candidate solution
-    std::vector<std::vector<double>> cov_matrix; // matrix representing the covariance matrix of the distribution
-    RandomNumberGenerator& rng; // random number generator
+    // population
+    int nrows;                                  // number of individuals in the optimization problem
+    int ncols;                                  // number of variables in the optimization problem
+    Matrix population;
 
-    std::vector<std::vector<double>> generate_samples();
-    std::vector<std::pair<double, std::vector<double>>> evaluate_samples(const std::vector<std::vector<double>>& samples, std::function<double(const std::vector<double>&)> objective_function);
-    void update_distribution(const std::vector<std::pair<double, std::vector<double>>>& evaluated_samples);
+    // decision
+    Matrix means;                               // means of decision variables
+    SymmetricMatrix cov;                        // covariance matrix
+    ColumnVector pc;                            // path vector
+    ColumnVector psigma;                        // path vector
+
+    // parameters of the covariance matrix adaptiation (CMA) evolutionary algorithm (CMA-ES)
+    int mu;                                     // mu-best relevant individuals (updating covariance matrix)
+    double wi;                                  // could be a single value or a vector comprising the weights of individuals
+    double mueff;                               // 1 <= mueff  <= mu -> the variance effective selection mass
+    double mucov;                               // parameter for weighting between rank-one and rank-mu update
+    double ccov;                                // <= 1, learning rate for cumulation for the rank-one update + covariance matrix
+    double cc;                                  // 1/cc is the bacward time horizon
+    double csigma;                              // 1/csigma is the backward time horizon
+    double dsigma;                              // damping parameter for the step size update
+    double sigma;                               // adaptive learning rate
+
+    // eigen-variables
+    DiagonalMatrix D;                           // contains the eigenvalues of the covariance matrix
+    Matrix V;                                   // contains the eigenvectors column-wise
+
+    // other
+    int max_iterations;                         // max iteration in CMA-ES
+    double sigma_limit;                         // lower sigma limitation (> sigma_limit)
+    RandomNumberGenerator& rng;                 // random number generator
+
+
+    // initialization methods
+    void initialize_population();
+    void initialize_covariance_matrix();
+    SymmetricMatrix get_empirical_covariance_matrix(const Matrix&);
+
+    // methods calculating variables
+    Matrix calculate_new_means();
+    Matrix calculate_muupdate();
+
+    // methods updating parameters
+    void update_population();
+    void update_parameters();
+    void update_pc(const Matrix&);
+    void update_cov(const Matrix&);
+    void update_psigma(const Matrix&);
+    void update_sigma();
+
+    // other
+    void sort_population(Matrix&, function<double(const RowVector&)>);
+    void eigenvalues_decomposition();
+    double EN01_approximation(int);
 };

@@ -2,7 +2,8 @@
 
 LinearCongruentialGenerator::LinearCongruentialGenerator(uint64_t seed) : RandomNumberGenerator(seed), rng(static_cast<unsigned int>(seed)) {}
 
-double LinearCongruentialGenerator::generate()
+double LinearCongruentialGenerator::generate(double a, double b)
 {
-    return static_cast<double>(rng()) / rng.max();
+    std::uniform_real_distribution<double> dist(a, b);
+    return dist(rng);
 }
