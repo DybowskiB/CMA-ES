@@ -1,9 +1,23 @@
-#include "linear_congruential_generator.h"
+/*#include "linear_congruential_generator.h"
 
-LinearCongruentialGenerator::LinearCongruentialGenerator(uint64_t seed) : RandomNumberGenerator(seed), rng(static_cast<unsigned int>(seed)) {}
+LinearCongruentialGenerator::LinearCongruentialGenerator(int seed) : RandomNumberGenerator(seed), rng(static_cast<unsigned int>(seed)) {}
 
-double LinearCongruentialGenerator::generate(double a, double b)
+double LinearCongruentialGenerator::operator()()
 {
-    std::uniform_real_distribution<double> dist(a, b);
-    return dist(rng);
+    return rng();
 }
+
+void LinearCongruentialGenerator::discard(int n)
+{
+    rng.discard(n);
+}
+
+constexpr unsigned LinearCongruentialGenerator::min()
+{
+    return 
+}
+
+constexpr unsigned LinearCongruentialGenerator::max()
+{
+    return static_cast<unsigned>(5);
+}*/

@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "../random_number_generator.h"
 
@@ -12,4 +12,4 @@ private:
 public:
     MersenneTwister(uint64_t);
     double generate(double, double) override;
-};
+};*/

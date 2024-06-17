@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "../random_number_generator.h"
 
@@ -10,6 +10,9 @@ private:
     std::minstd_rand rng;
 
 public:
-    LinearCongruentialGenerator(uint64_t);
-    double generate(double, double) override;
-};
+    LinearCongruentialGenerator(int);
+    double operator()() override;
+    void discard(int) override;
+    static constexpr unsigned min();
+    static constexpr unsigned max();
+};*/

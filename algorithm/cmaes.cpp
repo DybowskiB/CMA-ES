@@ -7,10 +7,9 @@
 #include <algorithm>
 #include <functional>
 
-using namespace std;
-
-CMAES::CMAES(int nrows, int ncols, RandomNumberGenerator& rng_generator)
-    : nrows(nrows), ncols(ncols), population(nrows, ncols), means(ncols, 1), cov(ncols), pc(ncols), psigma(ncols), rng(rng_generator)
+CMAES::CMAES(int nrows, int ncols, RandomIntNumberGenerator& int_rng, RandomDoubleNumberGenerator& double_rng)
+    : nrows(nrows), ncols(ncols), population(nrows, ncols), means(ncols, 1), cov(ncols), pc(ncols), psigma(ncols), 
+        int_rng(int_rng), double_rng(double_rng)
 {
     // decision
     means = 0.0;
@@ -36,9 +35,9 @@ void CMAES::optimize(int max_iterations, double sigma_limit, function<double(con
 {
     for (int k = 0; k < max_iterations && sigma > sigma_limit; ++k)
     {
-        /*std:cout << "Iteration: " << k << " - sigma=" << sigma << ":\n" << population << "\n\n\nFitness:\n";
+        std:cout << "Iteration: " << k << " - sigma=" << sigma << ":\n" << population << "\n\n\nFitness:\n";
         for (int i = 0; i < nrows; ++i)
-            std::cout << objective_function(population.row(i + 1)) << std::endl;*/
+            std::cout << objective_function(population.row(i + 1)) << std::endl;
 
         eigenvalues_decomposition();
         update_population();
@@ -53,7 +52,7 @@ void CMAES::initialize_population()
     {
         for (int j = 0; j < ncols; ++j)
         {
-            population.element(i, j) = rng.generate(-5, 5);
+            population.element(i, j) = std::uniform_int_distribution<int>(-5, 5)(int_rng);
         }
     }
     means = (population.sum_columns() / double(nrows)).t();
@@ -120,7 +119,7 @@ void CMAES::update_population()
         ColumnVector randVec(ncols);
         for (int j = 0; j < ncols; ++j)
         {
-            randVec.element(j) = rng.generate(0, 1);
+            randVec.element(j) = std::normal_distribution<double>(0, 1)(double_rng);
         }
         Matrix auxiliary_matrix = means + sigma * V * D * randVec;
         population.row(i + 1) = auxiliary_matrix.t();
