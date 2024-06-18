@@ -1,17 +1,16 @@
 #include "./algorithm/cmaes.h"
-/*#include "./generators/mersenne_twister/mersenne_twister.h"
-#include "./generators/linear_congruential/linear_congruential_generator.h"*/
+#include "./generators/mersenne_twister/mersenne_twister.h"
+#include "./generators/linear_congruential/linear_congruential_generator.h"
 #include "./generators/xoroshiro/xoroshiro.h"
-#include "./generators/xoroshiro/int_xoroshiro.h"
 #include "./newmat11/newmat.h"
 #include "./newmat11/newmatio.h"
 #include "./newmat11/newmatap.h"
-#include "./test_generator.cpp"
 
 #include <iostream>
 #include <vector>
 #include <cmath>
 #include <random>
+#include <climits>
 
 using namespace std;
 
@@ -34,17 +33,18 @@ double fitness(const RowVector& x)
 
 int main()
 {
-    MyRandomEngine myRand;
     Xoroshiro xoro(12345);
-    IntXoroshiro int_xoro(12345);
-    std::uniform_real_distribution<double> dist1;
+    MersenneTwister mt(12345);
+    LinearCongruentialGenerator lcg(12345);
+    std::uniform_real_distribution<double> dist1(-5, 5);
     std::normal_distribution<double> dist2(0.0, 1.0); // use normal
     std::uniform_int_distribution<int> dist3(-5, 5);
 
-
-    for (int i = 0; i < 100; ++i)
+    for ( int i = 0; i < 20; ++i)
     {
-        cout << i << ". " << dist3(int_xoro) << endl;
+        cout << "Xoro: " << dist1(xoro) << endl;
+        cout << "Xoro: " << dist2(xoro) << endl;
+        cout << "Xoro: " << dist3(xoro) << endl;
     }
 
     return 0;

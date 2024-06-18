@@ -1,23 +1,32 @@
-/*#include "linear_congruential_generator.h"
+#include "linear_congruential_generator.h"
 
-LinearCongruentialGenerator::LinearCongruentialGenerator(int seed) : RandomNumberGenerator(seed), rng(static_cast<unsigned int>(seed)) {}
+#include <stdint.h>
+#include <iostream>
+
+LinearCongruentialGenerator::LinearCongruentialGenerator(int seed) : RandomNumberGenerator(seed), gen(seed) {}
+
+void LinearCongruentialGenerator::seed(int s)
+{
+    seed_val = s;
+    gen.seed(s);
+}
 
 double LinearCongruentialGenerator::operator()()
 {
-    return rng();
+    return static_cast<double>(gen());
 }
 
-void LinearCongruentialGenerator::discard(int n)
+void LinearCongruentialGenerator::discard(unsigned long long n)
 {
-    rng.discard(n);
+	gen.discard(n);
 }
 
-constexpr unsigned LinearCongruentialGenerator::min()
+double LinearCongruentialGenerator::min()
 {
-    return 
+    return static_cast<double>(gen.min());
 }
 
-constexpr unsigned LinearCongruentialGenerator::max()
+double LinearCongruentialGenerator::max()
 {
-    return static_cast<unsigned>(5);
-}*/
+    return static_cast<double>(gen.max());
+}

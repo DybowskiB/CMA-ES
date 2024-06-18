@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <iostream>
 
-Xoroshiro::Xoroshiro(int seed) : RandomDoubleNumberGenerator(seed), seed64(static_cast<uint64_t>(seed))
+Xoroshiro::Xoroshiro(int seed) : RandomNumberGenerator(seed), seed64(static_cast<uint64_t>(seed))
 {
     s[0] = seed64;
     s[1] = seed64 ^ 0xdeadbeefdeadbeef;
@@ -19,12 +19,12 @@ void Xoroshiro::seed(int s)
 
 double Xoroshiro::operator()()
 {
-    return next();
+    return transform_to_range(MIN_VAL, MAX_VAL, next());
 }
 
-void Xoroshiro::discard(int n)
+void Xoroshiro::discard(unsigned long long n)
 {
-	for (int i = 0; i < n; ++i)
+	for (long long unsigned i = 0; i < n; ++i)
 	{
 		next();
 	}
@@ -32,12 +32,12 @@ void Xoroshiro::discard(int n)
 
 double Xoroshiro::min()
 {
-    return 0.0;
+    return MIN_VAL;
 }
 
 double Xoroshiro::max()
 {
-    return 1.0;
+    return MAX_VAL;
 }
 
 inline uint64_t Xoroshiro::rotl(const uint64_t x, int k)

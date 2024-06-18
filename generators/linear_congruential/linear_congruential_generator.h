@@ -1,18 +1,19 @@
-/*#pragma once
+#pragma once
 
 #include "../random_number_generator.h"
 
 #include <random>
+#include <cstdint>
 
 class LinearCongruentialGenerator : public RandomNumberGenerator
 {
-private:
-    std::minstd_rand rng;
-
 public:
-    LinearCongruentialGenerator(int);
+    std::minstd_rand gen;
+
+    LinearCongruentialGenerator(int seed);
+    void seed(int) override;
     double operator()() override;
-    void discard(int) override;
-    static constexpr unsigned min();
-    static constexpr unsigned max();
-};*/
+    void discard(unsigned long long) override;
+    double min() override;
+    double max() override;
+};

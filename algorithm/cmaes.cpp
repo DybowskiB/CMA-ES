@@ -7,9 +7,8 @@
 #include <algorithm>
 #include <functional>
 
-CMAES::CMAES(int nrows, int ncols, RandomIntNumberGenerator& int_rng, RandomDoubleNumberGenerator& double_rng)
-    : nrows(nrows), ncols(ncols), population(nrows, ncols), means(ncols, 1), cov(ncols), pc(ncols), psigma(ncols), 
-        int_rng(int_rng), double_rng(double_rng)
+CMAES::CMAES(int nrows, int ncols, RandomNumberGenerator& rng)
+    : nrows(nrows), ncols(ncols), population(nrows, ncols), means(ncols, 1), cov(ncols), pc(ncols), psigma(ncols), rng(rng)
 {
     // decision
     means = 0.0;
@@ -52,7 +51,7 @@ void CMAES::initialize_population()
     {
         for (int j = 0; j < ncols; ++j)
         {
-            population.element(i, j) = std::uniform_int_distribution<int>(-5, 5)(int_rng);
+            population.element(i, j) = std::uniform_int_distribution<int>(-5, 5)(rng);
         }
     }
     means = (population.sum_columns() / double(nrows)).t();
@@ -119,7 +118,7 @@ void CMAES::update_population()
         ColumnVector randVec(ncols);
         for (int j = 0; j < ncols; ++j)
         {
-            randVec.element(j) = std::normal_distribution<double>(0, 1)(double_rng);
+            randVec.element(j) = std::normal_distribution<double>(0, 1)(rng);
         }
         Matrix auxiliary_matrix = means + sigma * V * D * randVec;
         population.row(i + 1) = auxiliary_matrix.t();

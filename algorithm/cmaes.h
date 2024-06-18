@@ -3,15 +3,14 @@
 #include "../newmat11/newmat.h"
 #include "../newmat11/newmatio.h"
 #include "../newmat11/newmatap.h"
-#include "../generators/random_int_number_generator.h"
-#include "../generators/random_double_number_generator.h"
+#include "../generators/random_number_generator.h"
 
 #include <vector>
 #include <functional>
 
 class CMAES {
 public:
-    CMAES(int, int, RandomIntNumberGenerator&, RandomDoubleNumberGenerator&);
+    CMAES(int, int, RandomNumberGenerator&);
 
     void optimize(int, double, std::function<double(const RowVector&)>);
 
@@ -45,8 +44,7 @@ private:
     // other
     int max_iterations;                             // max iteration in CMA-ES
     double sigma_limit;                             // lower sigma limitation (> sigma_limit)
-    RandomIntNumberGenerator& int_rng;              // random int number generator
-    RandomDoubleNumberGenerator& double_rng;        // random int number generator
+    RandomNumberGenerator& rng;                     // random number generator
 
 
     // initialization methods

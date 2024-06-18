@@ -1,10 +1,32 @@
-/*#include "mersenne_twister.h"
+#include "mersenne_twister.h"
 
-MersenneTwister::MersenneTwister(uint64_t seed) : RandomNumberGenerator(seed), rng(static_cast<unsigned int>(seed)) {}
+#include <stdint.h>
+#include <iostream>
 
-double MersenneTwister::generate(double a, double b)
+MersenneTwister::MersenneTwister(int seed) : RandomNumberGenerator(seed), gen(seed) {}
+
+void MersenneTwister::seed(int s)
 {
-    std::uniform_real_distribution<double> dist(a, b);
-    return dist(rng);
+    seed_val = s;
+    gen.seed(s);
 }
-*/
+
+double MersenneTwister::operator()()
+{
+    return static_cast<double>(gen());
+}
+
+void MersenneTwister::discard(unsigned long long n)
+{
+	gen.discard(n);
+}
+
+double MersenneTwister::min()
+{
+    return static_cast<double>(gen.min());
+}
+
+double MersenneTwister::max()
+{
+    return static_cast<double>(gen.max());
+}
