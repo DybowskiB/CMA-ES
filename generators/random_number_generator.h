@@ -2,10 +2,15 @@
 
 #include <vector>
 #include <cstdint>
+#include <climits>
 
 // Abstract class for random double number generator
 class RandomNumberGenerator
 {
+protected:
+    const double MIN_VAL = 0.0;
+    const double MAX_VAL = static_cast<double>(INT_MAX);
+
 public:
     using result_type = double;
 

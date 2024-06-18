@@ -1,7 +1,10 @@
 #include "./algorithm/cmaes.h"
-#include "./generators/mersenne_twister/mersenne_twister.h"
+#include "./generators/mersenne_twister/mersenne_twister_generator.h"
 #include "./generators/linear_congruential/linear_congruential_generator.h"
-#include "./generators/xoroshiro/xoroshiro.h"
+#include "./generators/xoroshiro/xoroshiro_generator.h"
+#include "./generators/halton/halton_generator.h"
+#include "./generators/lagged_fibonacci/lagged_fibonacci_generator.h"
+#include "./generators/chacha20/chacha20.h"
 #include "./newmat11/newmat.h"
 #include "./newmat11/newmatio.h"
 #include "./newmat11/newmatap.h"
@@ -33,18 +36,24 @@ double fitness(const RowVector& x)
 
 int main()
 {
-    Xoroshiro xoro(12345);
-    MersenneTwister mt(12345);
+    XoroshiroGenerator xoro(12345);
+    MersenneTwisterGenerator mt(12345);
     LinearCongruentialGenerator lcg(12345);
     std::uniform_real_distribution<double> dist1(-5, 5);
     std::normal_distribution<double> dist2(0.0, 1.0); // use normal
     std::uniform_int_distribution<int> dist3(-5, 5);
 
+
+    int dimension = 2;
+    int seed = 5; // Ustawienie seeda
+
+    ChaCha20Generator chacha20(5);
+    LaggedFibonacciGenerator lfgen(5);
     for ( int i = 0; i < 20; ++i)
     {
-        cout << "Xoro: " << dist1(xoro) << endl;
-        cout << "Xoro: " << dist2(xoro) << endl;
-        cout << "Xoro: " << dist3(xoro) << endl;
+        cout << "Xoro: " << dist1(chacha20) << endl;
+        cout << "Xoro: " << dist2(chacha20) << endl;
+        cout << "Xoro: " << dist3(chacha20) << endl;
     }
 
     return 0;

@@ -1,9 +1,10 @@
-#include "xoroshiro.h"
+#include "xoroshiro_generator.h"
 
 #include <stdint.h>
 #include <iostream>
 
-Xoroshiro::Xoroshiro(int seed) : RandomNumberGenerator(seed), seed64(static_cast<uint64_t>(seed))
+XoroshiroGenerator::XoroshiroGenerator(int seed)
+    : RandomNumberGenerator(seed), seed64(static_cast<uint64_t>(seed))
 {
     s[0] = seed64;
     s[1] = seed64 ^ 0xdeadbeefdeadbeef;
@@ -11,18 +12,18 @@ Xoroshiro::Xoroshiro(int seed) : RandomNumberGenerator(seed), seed64(static_cast
     s[3] = seed64 ^ 0xfeedbeeffeedbeef;
 }
 
-void Xoroshiro::seed(int s)
+void XoroshiroGenerator::seed(int s)
 {
     seed_val = s;
     seed64 = static_cast<uint64_t>(s);
 }
 
-double Xoroshiro::operator()()
+double XoroshiroGenerator::operator()()
 {
     return transform_to_range(MIN_VAL, MAX_VAL, next());
 }
 
-void Xoroshiro::discard(unsigned long long n)
+void XoroshiroGenerator::discard(unsigned long long n)
 {
 	for (long long unsigned i = 0; i < n; ++i)
 	{
@@ -30,22 +31,22 @@ void Xoroshiro::discard(unsigned long long n)
 	}
 }
 
-double Xoroshiro::min()
+double XoroshiroGenerator::min()
 {
     return MIN_VAL;
 }
 
-double Xoroshiro::max()
+double XoroshiroGenerator::max()
 {
     return MAX_VAL;
 }
 
-inline uint64_t Xoroshiro::rotl(const uint64_t x, int k)
+inline uint64_t XoroshiroGenerator::rotl(const uint64_t x, int k)
 {
     return (x << k) | (x >> (64 - k));
 }
 
-double Xoroshiro::next()
+double XoroshiroGenerator::next()
 {
     const uint64_t result = s[0] + s[3];
 

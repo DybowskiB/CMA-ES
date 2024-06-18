@@ -3,7 +3,8 @@
 #include <stdint.h>
 #include <iostream>
 
-LinearCongruentialGenerator::LinearCongruentialGenerator(int seed) : RandomNumberGenerator(seed), gen(seed) {}
+LinearCongruentialGenerator::LinearCongruentialGenerator(int seed)
+    : RandomNumberGenerator(seed), gen(seed) {}
 
 void LinearCongruentialGenerator::seed(int s)
 {

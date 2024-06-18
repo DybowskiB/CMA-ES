@@ -5,15 +5,15 @@
 #include <random>
 #include <cstdint>
 
-class MersenneTwister : public RandomNumberGenerator
+class MersenneTwisterGenerator : public RandomNumberGenerator
 {
 public:
     std::mt19937 gen;
 
-    MersenneTwister(int seed);
-    void seed(int) override;
+    MersenneTwisterGenerator(int seed);
+    void seed(int seed) override;
     double operator()() override;
-    void discard(unsigned long long) override;
+    void discard(unsigned long long n) override;
     double min() override;
     double max() override;
 };

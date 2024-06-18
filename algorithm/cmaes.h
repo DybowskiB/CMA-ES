@@ -10,9 +10,9 @@
 
 class CMAES {
 public:
-    CMAES(int, int, RandomNumberGenerator&);
+    CMAES(int nrows, int ncols, RandomNumberGenerator& rng);
 
-    void optimize(int, double, std::function<double(const RowVector&)>);
+    void optimize(int max_iterations, double sigma_limit, function<double(const RowVector&)> objective_function);
 
 private:
     // population
@@ -50,7 +50,7 @@ private:
     // initialization methods
     void initialize_population();
     void initialize_covariance_matrix();
-    SymmetricMatrix get_empirical_covariance_matrix(const Matrix&);
+    SymmetricMatrix get_empirical_covariance_matrix(const Matrix& m);
 
     // methods calculating variables
     Matrix calculate_new_means();
@@ -59,13 +59,13 @@ private:
     // methods updating parameters
     void update_population();
     void update_parameters();
-    void update_pc(const Matrix&);
-    void update_cov(const Matrix&);
-    void update_psigma(const Matrix&);
+    void update_pc(const Matrix& new_means);
+    void update_cov(const Matrix& muupdate);
+    void update_psigma(const Matrix& new_means);
     void update_sigma();
 
     // other
-    void sort_population(Matrix&, function<double(const RowVector&)>);
+    void sort_population(Matrix& m, function<double(const RowVector&)> objective_function);
     void eigenvalues_decomposition();
-    double EN01_approximation(int);
+    double EN01_approximation(int n);
 };
