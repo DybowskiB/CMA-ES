@@ -36,25 +36,9 @@ double fitness(const RowVector& x)
 
 int main()
 {
-    XoroshiroGenerator xoro(12345);
     MersenneTwisterGenerator mt(12345);
-    LinearCongruentialGenerator lcg(12345);
-    std::uniform_real_distribution<double> dist1(-5, 5);
-    std::normal_distribution<double> dist2(0.0, 1.0); // use normal
-    std::uniform_int_distribution<int> dist3(-5, 5);
-
-
-    int dimension = 2;
-    int seed = 5; // Ustawienie seeda
-
-    ChaCha20Generator chacha20(5);
-    LaggedFibonacciGenerator lfgen(5);
-    for ( int i = 0; i < 20; ++i)
-    {
-        cout << "Xoro: " << dist1(chacha20) << endl;
-        cout << "Xoro: " << dist2(chacha20) << endl;
-        cout << "Xoro: " << dist3(chacha20) << endl;
-    }
+    CMAES cmaes(20, 2, mt);
+    cmaes.optimize(100000, 0.001, fitness);
 
     return 0;
 }

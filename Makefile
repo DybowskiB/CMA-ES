@@ -9,7 +9,7 @@ SRCDIRS = . algorithm generators generators/linear_congruential generators/merse
 OBJDIR = obj
 
 # Executable file
-TARGET = program
+TARGET = program.exe
 
 # Source files
 SOURCES = $(wildcard $(addsuffix /*.cpp, $(SRCDIRS)))

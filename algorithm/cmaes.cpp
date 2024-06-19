@@ -20,7 +20,7 @@ CMAES::CMAES(int nrows, int ncols, RandomNumberGenerator& rng)
     wi = 1.0 / mu;
     mueff = std::pow(mu * wi, 2) / (mu * pow(wi, 2));
     mucov = mueff;
-    ccov = (1/ mucov) * 2 / std::pow(ncols + 1.4, 2) + (1 - 1 / mucov) * ((2 * mueff - 1) / (std::pow(ncols + 2, 2) + 2 * mueff));
+    ccov = (1 / mucov) * 2 / std::pow(ncols + 1.4, 2) + (1 - 1 / mucov) * ((2 * mueff - 1) / (std::pow(ncols + 2, 2) + 2 * mueff));
     cc = 1.0 / ncols;
     csigma = cc;
     dsigma = 1;
@@ -34,14 +34,14 @@ void CMAES::optimize(int max_iterations, double sigma_limit, function<double(con
 {
     for (int k = 0; k < max_iterations && sigma > sigma_limit; ++k)
     {
-        std:cout << "Iteration: " << k << " - sigma=" << sigma << ":\n" << population << "\n\n\nFitness:\n";
-        for (int i = 0; i < nrows; ++i)
-            std::cout << objective_function(population.row(i + 1)) << std::endl;
-
         eigenvalues_decomposition();
         update_population();
         sort_population(population, objective_function);
         update_parameters();
+
+        std::cout << "Iteration: " << k << " - sigma=" << sigma << ":\n" << population << "\n\n\nFitness:\n";
+        for (int i = 0; i < nrows; ++i)
+            std::cout << objective_function(population.row(i + 1)) << std::endl;
     }
 }
 
@@ -87,9 +87,9 @@ void CMAES::sort_population(Matrix& m, function<double(const RowVector&)> object
     bool terminated;
     do {
         terminated = true;
-        for (int i = 0; i < m.nrows(); ++i)
+        for (int i = 1; i < m.nrows(); ++i)
         {
-            if (objective_function(m.row(i + 1)) > objective_function(m.row(i)))
+            if (objective_function(m.row(i + 1)) < objective_function(m.row(i)))
             {
                 RowVector temp_row;
                 temp_row << m.row(i);
