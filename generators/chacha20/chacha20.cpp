@@ -6,7 +6,7 @@
 #include <cstdint>
 
 ChaCha20Generator::ChaCha20Generator(int seed)
-    : RandomNumberGenerator(seed), counter_(0)
+    : RandomNumberGenerator(seed, "ChaCha20"), counter_(0)
 {
     this->seed(seed);
 }

@@ -1,2 +1,0 @@
-g++ Compare_slow.cpp -O3 -o Compare_slow
-g++ Compare_fast.cpp -O3 -o Compare_fast

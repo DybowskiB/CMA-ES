@@ -4,7 +4,7 @@
 #include <iostream>
 
 XoroshiroGenerator::XoroshiroGenerator(int seed)
-    : RandomNumberGenerator(seed), seed64(static_cast<uint64_t>(seed))
+    : RandomNumberGenerator(seed, "Xoroshiro"), seed64(static_cast<uint64_t>(seed))
 {
     s[0] = seed64;
     s[1] = seed64 ^ 0xdeadbeefdeadbeef;

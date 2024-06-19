@@ -4,7 +4,7 @@
 #include <iostream>
 
 LinearCongruentialGenerator::LinearCongruentialGenerator(int seed)
-    : RandomNumberGenerator(seed), gen(seed) {}
+    : RandomNumberGenerator(seed, "LinearCongruential"), gen(seed) {}
 
 void LinearCongruentialGenerator::seed(int s)
 {

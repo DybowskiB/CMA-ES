@@ -1,24 +1,14 @@
-#include "./algorithm/cmaes.h"
-#include "./generators/mersenne_twister/mersenne_twister_generator.h"
-#include "./generators/linear_congruential/linear_congruential_generator.h"
-#include "./generators/xoroshiro/xoroshiro_generator.h"
-#include "./generators/halton/halton_generator.h"
-#include "./generators/lagged_fibonacci/lagged_fibonacci_generator.h"
-#include "./generators/chacha20/chacha20.h"
-#include "./newmat11/newmat.h"
-#include "./newmat11/newmatio.h"
-#include "./newmat11/newmatap.h"
+#include "./tests/test1/test1.h"
 
 #include <iostream>
-#include <vector>
-#include <cmath>
+
+#include "./generators/halton/halton_generator.h"
 #include <random>
-#include <climits>
 
 using namespace std;
 
 // Destination function (Rastrigin function)
-double rastrigin(const RowVector& x)
+/*double rastrigin(const RowVector& x)
 {
     double result = 10 * x.size();
     cout << "Ncols: " << x.ncols();
@@ -32,13 +22,32 @@ double rastrigin(const RowVector& x)
 double fitness(const RowVector& x)
 {
     return (100 * sqrt(abs(x.element(1) - 0.01 * pow(x.element(0), 2))) + 0.01 * abs(x.element(0) + 10));
-}
+}*/
 
 int main()
 {
-    MersenneTwisterGenerator mt(12345);
-    CMAES cmaes(20, 2, mt);
-    cmaes.optimize(100000, 0.001, fitness);
+    int testNumber;
+
+    HaltonGenerator halton(2, 1);
+    for(int i = 0; i < 100; i++)
+    {
+        std::uniform_real_distribution<double> distribution(0.0, 10.0);
+        std::cout<< distribution(halton) << std::endl;
+        //std::cout << halton() << std::endl;
+    }
+
+/*
+    std::cout << "Choose test number: ";
+    std::cin >> testNumber;
+
+    switch (testNumber) {
+        case 1:
+            Test1::run();
+            break;
+        default:
+            std::cerr << "Nieprawidłowy numer testu. Wybierz 1, 2 lub 3." << std::endl;
+            break;
+    }*/
 
     return 0;
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 
 MersenneTwisterGenerator::MersenneTwisterGenerator(int seed)
-    : RandomNumberGenerator(seed), gen(seed) {}
+    : RandomNumberGenerator(seed, "MersenneTwister"), gen(seed) {}
 
 void MersenneTwisterGenerator::seed(int s)
 {

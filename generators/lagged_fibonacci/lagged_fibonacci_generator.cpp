@@ -5,7 +5,7 @@
 #include <cmath>
 
 LaggedFibonacciGenerator::LaggedFibonacciGenerator(int seed = 0)
-    : RandomNumberGenerator(seed)
+    : RandomNumberGenerator(seed, "LaggedFibonacci")
 {
     initialize();
 }

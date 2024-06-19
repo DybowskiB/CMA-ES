@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17 -Wno-misleading-indentation
 
 # Directories
-SRCDIRS = . algorithm generators generators/linear_congruential generators/mersenne_twister generators/xoroshiro generators/halton generators/lagged_fibonacci generators/chacha20 newmat11
+SRCDIRS = . algorithm generators generators/linear_congruential generators/mersenne_twister generators/xoroshiro generators/halton generators/lagged_fibonacci generators/chacha20 newmat11 CEC17_fast_pow tests/test1
 OBJDIR = obj
 
 # Executable file

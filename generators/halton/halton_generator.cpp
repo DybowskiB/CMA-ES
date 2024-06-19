@@ -6,7 +6,7 @@
 #include <cmath>
 
 HaltonGenerator::HaltonGenerator(int dimension, int seed = 0)
-    : RandomNumberGenerator(seed), dimension(dimension), index(seed)
+    : RandomNumberGenerator(seed, "Halton"), dimension(dimension), index(seed)
 {
     if (dimension > HALTON_MAX_DIMENSION)
     {
@@ -22,7 +22,7 @@ void HaltonGenerator::seed(int seed)
 
 double HaltonGenerator::operator()()
 {
-    return transform_to_range(MIN_VAL, MAX_VAL, next()[0]);
+    return next()[0] * static_cast<double>(MAX_VAL);
 }
 
 void HaltonGenerator::discard(unsigned long long n)

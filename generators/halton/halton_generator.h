@@ -8,7 +8,7 @@
 class HaltonGenerator : public RandomNumberGenerator
 {
 public:
-    HaltonGenerator(int seed, int dimension);
+    HaltonGenerator(int dimension, int seed);
 
     void seed(int seed) override;
     double operator()() override;

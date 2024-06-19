@@ -70,8 +70,8 @@ void asyfunc (double *, double *x, int, double);
 void oszfunc (double *, double *, int);
 void cf_cal(double *, double *, int, double *,double *,double *,double *,int);
 
-extern double *OShift,*M,*y,*z,*x_bound;
-extern int ini_flag,n_flag,func_flag,*SS;
+double *OShift,*M,*y,*z,*x_bound;
+int ini_flag,n_flag,func_flag,*SS;
 
 double fast_pow(double x, int p)
 {
