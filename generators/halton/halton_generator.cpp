@@ -22,7 +22,7 @@ void HaltonGenerator::seed(int seed)
 
 double HaltonGenerator::operator()()
 {
-    return next()[0] * static_cast<double>(MAX_VAL);
+    return next()[dimension - 1] * static_cast<double>(MAX_VAL);
 }
 
 void HaltonGenerator::discard(unsigned long long n)

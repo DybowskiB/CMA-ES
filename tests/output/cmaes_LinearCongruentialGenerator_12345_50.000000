@@ -1,0 +1,45 @@
+Generator: LinearCongruential
+Dimension: 50
+
+
+1. Sphere function:
+Number of iterations: 520
+Final sigma value: 0.000991029
+x: 0.0537441, ECDF: 0.0500096
+x: 0.223356, ECDF: 0.15001
+x: 0.958056, ECDF: 0.25001
+x: 4.04067, ECDF: 0.35001
+x: 15.0818, ECDF: 0.45001
+x: 62.8978, ECDF: 0.55001
+x: 241.399, ECDF: 0.65001
+x: 1000.9, ECDF: 0.75001
+x: 3851.2, ECDF: 0.85001
+x: 17177.8, ECDF: 0.95001
+
+2. Ackley function:
+Number of iterations: 538
+Final sigma value: 0.000994284
+x: 0.190178, ECDF: 0.0500093
+x: 0.510847, ECDF: 0.150009
+x: 1.28857, ECDF: 0.250009
+x: 2.59783, ECDF: 0.350009
+x: 3.87254, ECDF: 0.450009
+x: 5.73875, ECDF: 0.550009
+x: 8.9369, ECDF: 0.650009
+x: 13.4975, ECDF: 0.750009
+x: 18.2944, ECDF: 0.850009
+x: 21.2129, ECDF: 0.950009
+
+3. Rastrigin function:
+Number of iterations: 696
+Final sigma value: 0.000994129
+x: 110.774, ECDF: 0.0500072
+x: 171.469, ECDF: 0.150007
+x: 331.814, ECDF: 0.250007
+x: 503.401, ECDF: 0.350007
+x: 581.478, ECDF: 0.450007
+x: 629.676, ECDF: 0.550007
+x: 687.123, ECDF: 0.650007
+x: 887.198, ECDF: 0.750007
+x: 2383.94, ECDF: 0.850007
+x: 13973.1, ECDF: 0.950007

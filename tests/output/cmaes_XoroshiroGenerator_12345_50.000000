@@ -1,0 +1,45 @@
+Generator: Xoroshiro
+Dimension: 50
+
+
+1. Sphere function:
+Number of iterations: 515
+Final sigma value: 0.000996914
+x: 0.0489428, ECDF: 0.0500097
+x: 0.208476, ECDF: 0.15001
+x: 0.857498, ECDF: 0.25001
+x: 3.32184, ECDF: 0.35001
+x: 13.9765, ECDF: 0.45001
+x: 53.2514, ECDF: 0.55001
+x: 210.378, ECDF: 0.65001
+x: 881.43, ECDF: 0.75001
+x: 3609.56, ECDF: 0.85001
+x: 15847.2, ECDF: 0.95001
+
+2. Ackley function:
+Number of iterations: 1000
+Final sigma value: 0.6678
+x: 21.5083, ECDF: 0.050005
+x: 21.6014, ECDF: 0.150005
+x: 21.6435, ECDF: 0.250005
+x: 21.6749, ECDF: 0.350005
+x: 21.7026, ECDF: 0.450005
+x: 21.7284, ECDF: 0.550005
+x: 21.7542, ECDF: 0.650005
+x: 21.7821, ECDF: 0.750005
+x: 21.8162, ECDF: 0.850005
+x: 21.8775, ECDF: 0.950005
+
+3. Rastrigin function:
+Number of iterations: 792
+Final sigma value: 0.000994614
+x: 170.021, ECDF: 0.0500063
+x: 266.686, ECDF: 0.150006
+x: 470.313, ECDF: 0.250006
+x: 586.073, ECDF: 0.350006
+x: 631.136, ECDF: 0.450006
+x: 666.553, ECDF: 0.550006
+x: 709.597, ECDF: 0.650006
+x: 833.469, ECDF: 0.750006
+x: 2077.88, ECDF: 0.850006
+x: 13278.3, ECDF: 0.950006

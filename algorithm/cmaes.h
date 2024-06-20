@@ -12,7 +12,8 @@ class CMAES {
 public:
     CMAES(int nrows, int ncols, RandomNumberGenerator& rng);
 
-    void optimize(int max_iterations, double sigma_limit, function<double(const RowVector&)> objective_function);
+    std::vector<std::vector<double>> optimize(int max_iterations, double sigma_limit, void (*obj_func)(double *, double *, int, double *, double *, int, int));
+    double get_sigma();
 
 private:
     // population
@@ -65,7 +66,8 @@ private:
     void update_sigma();
 
     // other
-    void sort_population(Matrix& m, function<double(const RowVector&)> objective_function);
+    void sort_population(Matrix& m, void (*obj_func)(double *, double *, int, double *, double *, int, int));
     void eigenvalues_decomposition();
     double EN01_approximation(int n);
+    double evaluate_function(Matrix& m, int i, void (*obj_func)(double *, double *, int, double *, double *, int, int));
 };

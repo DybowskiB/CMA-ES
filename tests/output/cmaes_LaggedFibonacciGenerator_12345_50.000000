@@ -1,0 +1,45 @@
+Generator: LaggedFibonacci
+Dimension: 50
+
+
+1. Sphere function:
+Number of iterations: 525
+Final sigma value: 0.000985733
+x: 0.0537807, ECDF: 0.0500095
+x: 0.236013, ECDF: 0.15001
+x: 0.978514, ECDF: 0.25001
+x: 4.17326, ECDF: 0.35001
+x: 16.8374, ECDF: 0.45001
+x: 68.9934, ECDF: 0.55001
+x: 268.047, ECDF: 0.65001
+x: 1091.68, ECDF: 0.75001
+x: 4231.09, ECDF: 0.85001
+x: 17807.2, ECDF: 0.95001
+
+2. Ackley function:
+Number of iterations: 530
+Final sigma value: 0.000990185
+x: 0.191929, ECDF: 0.0500094
+x: 0.515437, ECDF: 0.150009
+x: 1.37026, ECDF: 0.250009
+x: 2.67048, ECDF: 0.350009
+x: 3.90675, ECDF: 0.450009
+x: 5.79144, ECDF: 0.550009
+x: 8.94697, ECDF: 0.650009
+x: 13.501, ECDF: 0.750009
+x: 18.2563, ECDF: 0.850009
+x: 21.1906, ECDF: 0.950009
+
+3. Rastrigin function:
+Number of iterations: 703
+Final sigma value: 0.000991082
+x: 116.097, ECDF: 0.0500071
+x: 190.568, ECDF: 0.150007
+x: 379.245, ECDF: 0.250007
+x: 523.967, ECDF: 0.350007
+x: 597.288, ECDF: 0.450007
+x: 650.377, ECDF: 0.550007
+x: 713.231, ECDF: 0.650007
+x: 890.83, ECDF: 0.750007
+x: 2442.01, ECDF: 0.850007
+x: 13860.7, ECDF: 0.950007

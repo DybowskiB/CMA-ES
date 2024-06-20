@@ -5,25 +5,25 @@
 */
 
 
+#include "./cec17_test_fast_pow.h"
+
 //#include <WINDOWS.H>
 #include <stdio.h>
 #include <math.h>
 #include <malloc.h>
+#include <iostream>
 
 #define INF 1.0e99
 #define EPS 1.0e-14
 #define E  2.7182818284590452353602874713526625
 #define PI 3.1415926535897932384626433832795029
 
-void sphere_func (double *, double *, int , double *,double *, int, int); /* Sphere */
 void ellips_func(double *, double *, int , double *,double *, int, int); /* Ellipsoidal */
 void bent_cigar_func(double *, double *, int , double *,double *, int, int); /* Discus */
 void discus_func(double *, double *, int , double *,double *, int, int);  /* Bent_Cigar */
 void dif_powers_func(double *, double *, int , double *,double *, int, int);  /* Different Powers */
 void rosenbrock_func (double *, double *, int , double *,double *, int, int); /* Rosenbrock's */
 void schaffer_F7_func (double *, double *, int , double *,double *, int, int); /* Schwefel's F7 */
-void ackley_func (double *, double *, int , double *,double *, int, int); /* Ackley's */
-void rastrigin_func (double *, double *, int , double *,double *, int, int); /* Rastrigin's  */
 void weierstrass_func (double *, double *, int , double *,double *, int, int); /* Weierstrass's  */
 void griewank_func (double *, double *, int , double *,double *, int, int); /* Griewank's  */
 void schwefel_func (double *, double *, int , double *,double *, int, int); /* Schwefel's */
@@ -367,10 +367,10 @@ void sphere_func (double *x, double *f, int nx, double *Os, double *Mr, int s_fl
 {
 	int i;
 	f[0] = 0.0;
-	sr_func (x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* shift and rotate */
+	//sr_func (x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* shift and rotate */
 	for (i=0; i<nx; i++)
 	{
-		f[0] += z[i]*z[i];
+		f[0] += x[i]*x[i];
 	}
 
 }
@@ -562,12 +562,12 @@ void ackley_func (double *x, double *f, int nx, double *Os,double *Mr,int s_flag
     sum1 = 0.0;
     sum2 = 0.0;
 
-	sr_func (x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* shift and rotate */
+	//sr_func (x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* shift and rotate */
 
 	for (i=0; i<nx; i++)
 	{
-		sum1 += z[i]*z[i];
-		sum2 += cos(2.0*PI*z[i]);
+		sum1 += x[i]*x[i];
+		sum2 += cos(2.0*PI*x[i]);
 	}
 	sum1 = -0.2*sqrt(sum1/nx);
 	sum2 /= nx;
@@ -625,11 +625,11 @@ void rastrigin_func (double *x, double *f, int nx, double *Os,double *Mr,int s_f
     int i;
 	f[0] = 0.0;
 
-	sr_func (x, z, nx, Os, Mr, 5.12/100.0, s_flag, r_flag); /* shift and rotate */
+	//sr_func (x, z, nx, Os, Mr, 5.12/100.0, s_flag, r_flag); /* shift and rotate */
 
 	for (i=0; i<nx; i++)
 	{
-		f[0] += (z[i]*z[i] - 10.0*cos(2.0*PI*z[i]) + 10.0);
+		f[0] += (x[i]*x[i] - 10.0*cos(2.0*PI*x[i]) + 10.0);
 	}
 }
 

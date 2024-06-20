@@ -1,0 +1,45 @@
+Generator: Halton
+Dimension: 50
+
+
+1. Sphere function:
+Number of iterations: 1000
+Final sigma value: 9.65613
+x: 271589, ECDF: 0.050005
+x: 4.03468e+06, ECDF: 0.150005
+x: 3.51499e+07, ECDF: 0.250005
+x: 8.19662e+07, ECDF: 0.350005
+x: 1.67564e+08, ECDF: 0.450005
+x: 2.95084e+08, ECDF: 0.550005
+x: 5.7365e+08, ECDF: 0.650005
+x: 7.22657e+08, ECDF: 0.750005
+x: 8.39468e+08, ECDF: 0.850005
+x: 1.00298e+09, ECDF: 0.950005
+
+2. Ackley function:
+Number of iterations: 1000
+Final sigma value: 26.8212
+x: 21.1865, ECDF: 0.050005
+x: 21.6021, ECDF: 0.150005
+x: 21.6442, ECDF: 0.250005
+x: 21.6763, ECDF: 0.350005
+x: 21.7036, ECDF: 0.450005
+x: 21.7291, ECDF: 0.550005
+x: 21.755, ECDF: 0.650005
+x: 21.7827, ECDF: 0.750005
+x: 21.8164, ECDF: 0.850005
+x: 21.8782, ECDF: 0.950005
+
+3. Rastrigin function:
+Number of iterations: 1000
+Final sigma value: 82.1981
+x: 399587, ECDF: 0.050005
+x: 1.58653e+07, ECDF: 0.150005
+x: 1.52957e+08, ECDF: 0.250005
+x: 4.40955e+08, ECDF: 0.350005
+x: 7.28116e+08, ECDF: 0.450005
+x: 1.07375e+09, ECDF: 0.550005
+x: 1.66914e+09, ECDF: 0.650005
+x: 2.33378e+09, ECDF: 0.750005
+x: 3.95972e+09, ECDF: 0.850005
+x: 7.63778e+09, ECDF: 0.950005

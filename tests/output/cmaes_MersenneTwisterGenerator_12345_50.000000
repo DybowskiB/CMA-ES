@@ -1,0 +1,45 @@
+Generator: MersenneTwister
+Dimension: 50
+
+
+1. Sphere function:
+Number of iterations: 516
+Final sigma value: 0.00099996
+x: 0.053322, ECDF: 0.0500097
+x: 0.225005, ECDF: 0.15001
+x: 0.958716, ECDF: 0.25001
+x: 3.8836, ECDF: 0.35001
+x: 14.6121, ECDF: 0.45001
+x: 62.6427, ECDF: 0.55001
+x: 249.661, ECDF: 0.65001
+x: 936.476, ECDF: 0.75001
+x: 3976.33, ECDF: 0.85001
+x: 16160, ECDF: 0.95001
+
+2. Ackley function:
+Number of iterations: 538
+Final sigma value: 0.00098754
+x: 0.192833, ECDF: 0.0500093
+x: 0.465859, ECDF: 0.150009
+x: 1.19386, ECDF: 0.250009
+x: 2.50027, ECDF: 0.350009
+x: 3.8273, ECDF: 0.450009
+x: 5.539, ECDF: 0.550009
+x: 8.89556, ECDF: 0.650009
+x: 13.6055, ECDF: 0.750009
+x: 18.3027, ECDF: 0.850009
+x: 21.1538, ECDF: 0.950009
+
+3. Rastrigin function:
+Number of iterations: 756
+Final sigma value: 0.000996452
+x: 107.963, ECDF: 0.0500066
+x: 185.932, ECDF: 0.150007
+x: 384.896, ECDF: 0.250007
+x: 516.738, ECDF: 0.350007
+x: 572.603, ECDF: 0.450007
+x: 619.662, ECDF: 0.550007
+x: 681.103, ECDF: 0.650007
+x: 865.691, ECDF: 0.750007
+x: 2292.6, ECDF: 0.850007
+x: 14641.3, ECDF: 0.950007

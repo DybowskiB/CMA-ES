@@ -1,8 +1,7 @@
 #include "./tests/test1/test1.h"
+#include "./tests/test2/test2.h"
 
 #include <iostream>
-
-#include "./generators/halton/halton_generator.h"
 #include <random>
 
 using namespace std;
@@ -28,26 +27,23 @@ int main()
 {
     int testNumber;
 
-    HaltonGenerator halton(2, 1);
-    for(int i = 0; i < 100; i++)
-    {
-        std::uniform_real_distribution<double> distribution(0.0, 10.0);
-        std::cout<< distribution(halton) << std::endl;
-        //std::cout << halton() << std::endl;
-    }
-
-/*
-    std::cout << "Choose test number: ";
+    std::cout << "Tests: " << std::endl;
+    std::cout << "1. Generators tests (histogram data + phi-square test)." << std::endl;
+    std::cout << "2. CMAES tests (ECDF data)." << std::endl;
+    std::cout << "Choose test number: " << std::endl;
     std::cin >> testNumber;
 
     switch (testNumber) {
         case 1:
             Test1::run();
             break;
-        default:
-            std::cerr << "Nieprawidłowy numer testu. Wybierz 1, 2 lub 3." << std::endl;
+        case 2:
+            Test2::run();
             break;
-    }*/
+        default:
+            std::cerr << "Incorrect test number choose 1 or 2." << std::endl;
+            break;
+    }
 
     return 0;
 }

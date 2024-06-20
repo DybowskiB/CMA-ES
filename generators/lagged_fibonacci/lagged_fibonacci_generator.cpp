@@ -45,7 +45,7 @@ unsigned int LaggedFibonacciGenerator::next()
 
 void LaggedFibonacciGenerator::initialize()
 {
-    // Initiazlize sequence using seed
+    // Initialize sequence using seed
     srand(seed_val);
     for (int i = 0; i < K; ++i)
     {

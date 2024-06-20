@@ -34,9 +34,9 @@ void Test1::run()
         new ChaCha20Generator(seeds[1]),
         new ChaCha20Generator(seeds[2]),
 
-        new HaltonGenerator(10, 1),
-        new HaltonGenerator(20, 1),
-        new HaltonGenerator(300, 1),
+        new HaltonGenerator(1, seeds[0]),
+        new HaltonGenerator(1, seeds[1]),
+        new HaltonGenerator(1, seeds[2]),
 
         new LaggedFibonacciGenerator(seeds[0]),
         new LaggedFibonacciGenerator(seeds[1]),
@@ -57,11 +57,11 @@ void Test1::run()
 
     for (size_t i = 0; i < generators.size(); ++i)
     {
-        std::string filename = "./tests/output/" + generators[i]->to_string();
-        execute_test(*generators[i], seeds[i], filename);
+        std::string filename = "./tests/output/generator_" + generators[i]->to_string();
+        execute_test(*generators[i], generators[i]->seed_val, filename);
     }
 
-    // Zwolnienie pamięci z dynamicznie zaalokowanych obiektów
+    // release resources
     for (auto *generator : generators)
     {
         delete generator;
@@ -73,14 +73,14 @@ void Test1::execute_test(RandomNumberGenerator &generator, int seed, const std::
     const int num_samples = 1000;
     const int num_bins = 10;
 
-    // Generowanie próbek
+    // generate samples
     std::vector<int> samples(num_samples);
     for (int i = 0; i < num_samples; ++i)
     {
         samples[i] = generate_sample(generator);
     }
 
-    // Tworzenie histogramu
+    // create histogram data
     std::vector<int> histogram(num_bins, 0);
     for (int sample : samples)
     {
@@ -91,7 +91,7 @@ void Test1::execute_test(RandomNumberGenerator &generator, int seed, const std::
         }
     }
 
-    // Chi square value
+    // chi square value
     double expected_frequency = static_cast<double>(num_samples) / num_bins;
     double chi_square = 0.0;
     for (int count : histogram)
@@ -100,7 +100,7 @@ void Test1::execute_test(RandomNumberGenerator &generator, int seed, const std::
         chi_square += (deviation * deviation) / expected_frequency;
     }
 
-    // Save result to file (overwrites if file exists)
+    // save result to file (overwrites if file exists)
     std::ofstream file(filename, std::ios::out | std::ios::trunc);
     if (!file.is_open())
     {

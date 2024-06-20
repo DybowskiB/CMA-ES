@@ -30,19 +30,30 @@ CMAES::CMAES(int nrows, int ncols, RandomNumberGenerator& rng)
     initialize_covariance_matrix();
 }
 
-void CMAES::optimize(int max_iterations, double sigma_limit, function<double(const RowVector&)> objective_function)
+std::vector<std::vector<double>> CMAES::optimize(int max_iterations, double sigma_limit, void (*obj_func)(double *, double *, int, double *, double *, int, int))
 {
+    std::vector<std::vector<double>> iteration_values;
     for (int k = 0; k < max_iterations && sigma > sigma_limit; ++k)
     {
         eigenvalues_decomposition();
         update_population();
-        sort_population(population, objective_function);
+        sort_population(population, obj_func);
         update_parameters();
 
-        std::cout << "Iteration: " << k << " - sigma=" << sigma << ":\n" << population << "\n\n\nFitness:\n";
+        std::vector<double> iteration_value;
         for (int i = 0; i < nrows; ++i)
-            std::cout << objective_function(population.row(i + 1)) << std::endl;
+        {
+            double val = evaluate_function(population, i + 1, obj_func);
+            iteration_value.push_back(val);
+        }
+        iteration_values.push_back(iteration_value);
     }
+    return iteration_values;
+}
+
+double CMAES::get_sigma()
+{
+    return sigma;
 }
 
 void CMAES::initialize_population()
@@ -82,14 +93,16 @@ SymmetricMatrix CMAES::get_empirical_covariance_matrix(const Matrix& m)
     return 1.0 / (m.nrows() - 1) * cov;
 }
 
-void CMAES::sort_population(Matrix& m, function<double(const RowVector&)> objective_function)
+void CMAES::sort_population(Matrix& m, void (*obj_func)(double *, double *, int, double *, double *, int, int))
 {
     bool terminated;
     do {
         terminated = true;
         for (int i = 1; i < m.nrows(); ++i)
         {
-            if (objective_function(m.row(i + 1)) < objective_function(m.row(i)))
+            double next_row_val = evaluate_function(m, i + 1, obj_func);
+            double curr_row_val = evaluate_function(m, i, obj_func);
+            if (next_row_val < curr_row_val)
             {
                 RowVector temp_row;
                 temp_row << m.row(i);
@@ -99,6 +112,27 @@ void CMAES::sort_population(Matrix& m, function<double(const RowVector&)> object
             }
         }
     } while (!terminated);
+}
+
+double CMAES::evaluate_function(Matrix &m, int i, void (*obj_func)(double *, double *, int, double *, double *, int, int))
+{
+    double f_val;
+
+    RowVector row = m.Row(i);
+
+    int nx = row.ncols();
+    double* x = new double[nx];
+    for (int j = 0; j < nx; ++j)
+    {
+        x[j] = row(j + 1);
+    }
+
+    double* Os = NULL;
+    double* Mr = NULL;
+    obj_func(x, &f_val, nx, Os, Mr, 0, 0);
+    delete[] x;
+
+    return f_val;
 }
 
 void CMAES::eigenvalues_decomposition()
